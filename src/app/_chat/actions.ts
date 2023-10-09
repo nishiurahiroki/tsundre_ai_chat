@@ -6,7 +6,7 @@ const openai = new OpenAI({
 });
 import { ChatCompletionMessageParam } from 'openai/resources/chat';
 
-const EMOTIONS = ['angery', 'sad', 'happy', 'embarrassed'] as const;
+const EMOTIONS = ['angry', 'sad', 'happy', 'embarrassed'] as const;
 type ResponseEmotion = (typeof EMOTIONS)[number];
 type ResponseContent = {
   content: string;
