@@ -29,13 +29,6 @@ const TypingIndicator = () => (
 export const MessageList = (props: Props) => {
   return (
     <>
-      <img
-        src={'/images/emotion_faces/happy.png'}
-        width={512}
-        height={512}
-        alt="AIアイコン"
-        className={styles.icon}
-      />
       {props.messages.map((message, index) => (
         <div
           key={index}
