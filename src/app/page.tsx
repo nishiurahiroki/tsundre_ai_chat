@@ -13,6 +13,8 @@ export default function Page() {
   const handleOnClickButton = () => {
     const message = form.current.elements['message'].value;
 
+    if (!message) return;
+
     setMessages((prevMessages) => [
       ...prevMessages,
       {
