@@ -38,7 +38,7 @@ export async function chat(content: string): Promise<ResponseContent> {
         content,
       } as ChatCompletionMessageParam,
     ],
-    model: 'gpt-4',
+    model: process.env.NODE_ENV === 'production' ? 'gpt-4' : 'gpt-3.5-turbo',
   });
 
   const [choice] = chatCompletion.choices;
