@@ -6,6 +6,13 @@ const openai = new OpenAI({
 });
 import { ChatCompletionMessageParam } from 'openai/resources/chat';
 
+const EMOTIONS = ['angery', 'sad', 'happy', 'embarrassed'] as const;
+type ResponseEmotion = (typeof EMOTIONS)[number];
+type ResponseContent = {
+  content: string;
+  emotion: ResponseEmotion;
+};
+
 const messages: OpenAI.Chat.Completions.ChatCompletionMessageParam[] = [
   {
     role: 'user',
@@ -14,17 +21,13 @@ const messages: OpenAI.Chat.Completions.ChatCompletionMessageParam[] = [
        必ず下記のフォーマットかつ、javascriptのJSON.parse関数でパースしても実行時例外が発生しないフォーマットで返信してください。
        {
         "content" : "返信内容",
-        "emotion": "返信内容から鑑みた適切な感情。→のtypeから必ず選ぶ事 angery | sad | happy | embarrassed"
+        "emotion": "返信内容から鑑みた適切な感情。→のtypeから必ず選ぶ事 ${EMOTIONS.join(
+          ' | ',
+        )}"
        }
        `,
   },
 ];
-
-type ResponseEmotion = 'angery' | 'sad' | 'happy' | 'embarrassed';
-type ResponseContent = {
-  content: string;
-  emotion: ResponseEmotion;
-};
 
 export async function chat(content: string) {
   const chatCompletion = await openai.chat.completions.create({
