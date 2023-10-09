@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import styles from './styles.module.css';
+import Favicon from '/public/images/metadata/favicon.ico';
 
 export const metadata: Metadata = {
   title: 'ツンデレAIチャット',
@@ -8,6 +9,7 @@ export const metadata: Metadata = {
   viewport: 'width=device-width, initial-scale=1.0',
   keywords:
     'チャット, チャット ブラウザ, ツンデレ, tsundere, ツンデレ AI, ツンデレ チャット',
+  icons: [{ rel: 'icon', url: Favicon.src }],
 };
 
 export default function RootLayout({
