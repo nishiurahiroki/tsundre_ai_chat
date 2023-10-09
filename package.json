@@ -28,6 +28,7 @@
     "@storybook/testing-library": "^0.2.2",
     "@types/node": "20.8.3",
     "@types/react": "18.2.25",
+    "encoding": "^0.1.13",
     "storybook": "^7.4.6",
     "typescript": "5.2.2"
   }
