@@ -29,7 +29,7 @@ const messages: OpenAI.Chat.Completions.ChatCompletionMessageParam[] = [
   },
 ];
 
-export async function chat(content: string) {
+export async function chat(content: string): Promise<ResponseContent> {
   const chatCompletion = await openai.chat.completions.create({
     messages: [
       ...messages,
@@ -43,5 +43,5 @@ export async function chat(content: string) {
 
   const [choice] = chatCompletion.choices;
   const response: ResponseContent = JSON.parse(choice.message.content);
-  return response.content;
+  return response;
 }

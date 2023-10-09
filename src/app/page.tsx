@@ -28,7 +28,10 @@ export default function Page() {
       setMessages((prevMessages) => [
         ...prevMessages,
         {
-          content: answer,
+          content: {
+            content: answer.content,
+            iconUrl: `/images/emotion_faces/${answer.emotion}.png`,
+          },
           type: 'other',
         },
       ]);

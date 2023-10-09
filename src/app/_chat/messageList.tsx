@@ -1,7 +1,12 @@
+import Image from 'next/image';
+
 import styles from './messageList.module.css';
 
 export type SelfMessage = string;
-export type OtherMessage = string;
+export type OtherMessage = {
+  content: string;
+  iconUrl: string;
+};
 
 export type MessageItem = {
   type: 'self' | 'other';
@@ -24,6 +29,13 @@ const TypingIndicator = () => (
 export const MessageList = (props: Props) => {
   return (
     <>
+      <img
+        src={'/images/emotion_faces/happy.png'}
+        width={512}
+        height={512}
+        alt="AIアイコン"
+        className={styles.icon}
+      />
       {props.messages.map((message, index) => (
         <div
           key={index}
@@ -32,19 +44,24 @@ export const MessageList = (props: Props) => {
           }`}
         >
           {message.type === 'other' && (
-            <img
-              src="path_to_ai_icon.jpg"
-              alt="AIアイコン"
-              className={styles.icon}
-            />
+            <>
+              <Image
+                src={(message.content as OtherMessage).iconUrl}
+                width={512}
+                height={512}
+                alt="アイコン"
+                className={styles.icon}
+              />
+              <div className={`${styles.text} ${styles.aiText}`}>
+                {(message.content as OtherMessage).content}
+              </div>
+            </>
           )}
-          <div
-            className={`${styles.text} ${
-              message.type === 'self' ? styles.userText : styles.aiText
-            }`}
-          >
-            {message.content}
-          </div>
+          {message.type === 'self' && (
+            <div className={`${styles.text} ${styles.userText}`}>
+              {message.content as SelfMessage}
+            </div>
+          )}
         </div>
       ))}
       {props.isOtherTyping && <TypingIndicator />}
