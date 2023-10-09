@@ -1,0 +1,46 @@
+{
+  // タブサイズ
+  "editor.tabSize": 2,
+
+  // デフォルトのバリデータをOFFに
+  "css.validate": false,
+  "scss.validate": false,
+
+  "stylelint.validate": ["css", "typescript", "typescriptreact"],
+
+  "editor.formatOnSave": true,
+
+  // フォーマッターの指定
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  // 言語別に設定
+  // https://qiita.com/mysticatea/items/3f306470e8262e50bb70
+  "[javascript]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    }
+  },
+  "[typescript]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true,
+      "source.fixAll.stylelint": true
+    }
+  },
+  "[typescriptreact]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true,
+      "source.fixAll.stylelint": true
+    }
+  },
+  "[css]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.stylelint": true
+    }
+  },
+  "[json]": {
+    "editor.formatOnSave": true
+  },
+  "[jsonc]": {
+    "editor.formatOnSave": true
+  }
+}

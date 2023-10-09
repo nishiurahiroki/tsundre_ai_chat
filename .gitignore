@@ -1,0 +1,5 @@
+.pnp.*
+node_modules/
+.next/
+.env
+.yarn/
