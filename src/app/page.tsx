@@ -12,6 +12,7 @@ export default function Page() {
 
   const handleOnClickButton = () => {
     const message = form.current.elements['message'].value;
+
     setMessages((prevMessages) => [
       ...prevMessages,
       {
@@ -22,8 +23,12 @@ export default function Page() {
   };
 
   const handleFormAction = async (formData: FormData) => {
+    const message = formData.get('message').toString();
+
+    if (!message) return;
+    if (isPending) return;
+
     startTransition(async () => {
-      const message = formData.get('message').toString();
       const answer = await chat(message);
       setMessages((prevMessages) => [
         ...prevMessages,
@@ -53,10 +58,11 @@ export default function Page() {
           />
           <button
             onClick={handleOnClickButton}
-            className={styles.button}
+            className={`${styles.button} ${isPending ? styles.loading : ''}`}
             type="submit"
+            disabled={isPending}
           >
-            送信
+            {isPending || '送信'}
           </button>
         </div>
       </div>
