@@ -1,5 +1,8 @@
 'use client';
 
+import { useRef, useState, useTransition } from 'react';
+import { ChatCompletionMessageParam } from 'openai/resources/chat/completions';
+
 import styles from './styles.module.css';
 import {
   MessageItem,
@@ -7,10 +10,9 @@ import {
   OtherMessage,
   SelfMessage,
 } from './_chat/messageList';
-import { useRef, useState, useTransition } from 'react';
+
 import { chat } from './_chat/actions';
 import { TSUNDERE_GIRL_ICON_IMAGE_SRC } from '../consts';
-import { ChatCompletionMessageParam } from 'openai/resources/chat/completions';
 
 export default function Page() {
   const [messages, setMessages] = useState<MessageItem[]>([]);
