@@ -15,15 +15,11 @@ const baseMessage: OpenAI.Chat.Completions.ChatCompletionMessageParam = {
   role: 'user',
   content: TSUNDERE_BASE_PROMPT,
 };
-export async function chat(content: string): Promise<string> {
+export async function chat(
+  chatHistories: ChatCompletionMessageParam[],
+): Promise<string> {
   const chatCompletion = await openai.chat.completions.create({
-    messages: [
-      baseMessage,
-      {
-        role: 'user',
-        content,
-      } as ChatCompletionMessageParam,
-    ],
+    messages: [baseMessage, ...chatHistories],
     model:
       process.env.NODE_ENV === 'production'
         ? PRODCTION_GPT_MODEL
