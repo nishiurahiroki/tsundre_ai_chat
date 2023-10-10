@@ -19,7 +19,6 @@ export default function Page() {
   const [messages, setMessages] = useState<MessageItem[]>([]);
   const [isPending, startTransition] = useTransition();
   const form = useRef<HTMLFormElement>(null);
-  const submitButton = useRef<HTMLButtonElement>(null);
 
   const submitChat = (messages: MessageItem[]) => {
     startTransition(async () => {
@@ -108,7 +107,6 @@ export default function Page() {
             className={`${styles.button} ${isPending ? styles.loading : ''}`}
             type="submit"
             disabled={isPending}
-            ref={submitButton}
           >
             {isPending ? '' : '送信'}
           </button>
