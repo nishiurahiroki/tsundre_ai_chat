@@ -4,6 +4,7 @@ import styles from './styles.module.css';
 import { MessageItem, MessageList } from './_chat/messageList';
 import { useRef, useState, useTransition } from 'react';
 import { chat } from './_chat/actions';
+import { TSUNDERE_GIRL_ICON_IMAGE_SRC } from '../consts';
 
 export default function Page() {
   const [messages, setMessages] = useState<MessageItem[]>([]);
@@ -36,8 +37,8 @@ export default function Page() {
         ...prevMessages,
         {
           content: {
-            content: answer.content,
-            iconUrl: `/images/emotion_faces/${answer.emotion}.png`,
+            content: answer,
+            iconUrl: TSUNDERE_GIRL_ICON_IMAGE_SRC,
           },
           type: 'other',
         },
