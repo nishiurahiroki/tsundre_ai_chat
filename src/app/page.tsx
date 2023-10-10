@@ -20,9 +20,19 @@ export default function Page() {
   const [isPending, startTransition] = useTransition();
   const form = useRef<HTMLFormElement>(null);
 
-  const submitChat = (messages: MessageItem[]) => {
+  const submitChat = (message: string) => {
+    const updateMessages = [
+      ...messages,
+      {
+        content: message,
+        type: 'self',
+      } as MessageItem,
+    ];
+
+    setMessages(updateMessages); // ユーザーが送信したメッセージを即時メッセージエリアに反映するためにtransition前にset
+
     startTransition(async () => {
-      const chatHistories = messages.map<ChatCompletionMessageParam>(
+      const chatHistories = updateMessages.map<ChatCompletionMessageParam>(
         (message) => ({
           role: message.type === 'self' ? 'user' : 'assistant',
           content:
@@ -48,50 +58,29 @@ export default function Page() {
 
   const handleOnClickButton = () => {
     const message = form.current.elements['message'].value;
-    if (!message) return;
-
-    setMessages((prevMessages) => [
-      ...prevMessages,
-      {
-        content: message,
-        type: 'self',
-      },
-    ]);
-  };
-
-  const handleFormAction = async (formData: FormData) => {
-    const message = formData.get('message').toString();
 
     if (!message) return;
     if (isPending) return;
 
-    submitChat(messages);
+    submitChat(message);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === 'Enter' && e.shiftKey) {
-      return;
-    } else if (e.key === 'Enter') {
+    if (e.key === 'Enter' && e.shiftKey) return;
+    if (e.key === 'Enter') {
       e.preventDefault();
 
-      if (!e.currentTarget.value.trim()) return;
+      const message = e.currentTarget.value;
+
+      if (!message.trim()) return;
       if (isPending) return;
 
-      const updateMessages = [
-        ...messages,
-        {
-          content: e.currentTarget.value,
-          type: 'self',
-        } as MessageItem,
-      ];
-
-      setMessages(updateMessages);
-      submitChat(updateMessages);
+      submitChat(message);
     }
   };
 
   return (
-    <form ref={form} action={handleFormAction}>
+    <form ref={form}>
       <div className={styles.chatContainer}>
         <h1 className={styles.title}>ツンデレAIチャット</h1>
         <MessageList messages={messages} isOtherTyping={isPending} />
@@ -105,7 +94,7 @@ export default function Page() {
           <button
             onClick={handleOnClickButton}
             className={`${styles.button} ${isPending ? styles.loading : ''}`}
-            type="submit"
+            type="button"
             disabled={isPending}
           >
             {isPending ? '' : '送信'}
