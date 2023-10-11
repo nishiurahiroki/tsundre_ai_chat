@@ -42,8 +42,8 @@ export default function Page() {
         }),
       );
       const answer = await chat(chatHistories);
-      setMessages((prevMessages) => [
-        ...prevMessages,
+      setMessages([
+        ...updateMessages,
         {
           content: {
             content: answer,
