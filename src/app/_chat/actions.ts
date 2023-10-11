@@ -7,19 +7,26 @@ const openai = new OpenAI({
 import { ChatCompletionMessageParam } from 'openai/resources/chat';
 import {
   DEVELOPMENT_GPT_MODEL,
+  GREETING_MESSAGE,
   PRODCTION_GPT_MODEL,
   TSUNDERE_BASE_PROMPT,
 } from '../../consts';
 
-const baseMessage: OpenAI.Chat.Completions.ChatCompletionMessageParam = {
-  role: 'user',
-  content: TSUNDERE_BASE_PROMPT,
-};
+const baseMessages: OpenAI.Chat.Completions.ChatCompletionMessageParam[] = [
+  {
+    role: 'user',
+    content: TSUNDERE_BASE_PROMPT,
+  },
+  {
+    role: 'assistant',
+    content: GREETING_MESSAGE,
+  },
+];
 export async function chat(
   chatHistories: ChatCompletionMessageParam[],
 ): Promise<string> {
   const chatCompletion = await openai.chat.completions.create({
-    messages: [baseMessage, ...chatHistories],
+    messages: [...baseMessages, ...chatHistories],
     model:
       process.env.NODE_ENV === 'production'
         ? PRODCTION_GPT_MODEL

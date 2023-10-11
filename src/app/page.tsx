@@ -1,9 +1,11 @@
 'use client';
 
+import Image from 'next/image';
 import { useRef, useState, useTransition } from 'react';
 import { ChatCompletionMessageParam } from 'openai/resources/chat/completions';
 
 import styles from './page.module.css';
+import messageListStyles from './_chat/messageList.module.css';
 import {
   MessageItem,
   MessageList,
@@ -14,6 +16,7 @@ import {
 import { chat } from './_chat/actions';
 import { TSUNDERE_GIRL_ICON_IMAGE_SRC } from '../consts';
 import ResizableTextarea from '../component/ResizableTextarea';
+import { GreetingMessage } from './_chat/greetingMessage';
 
 export default function Page() {
   const [messages, setMessages] = useState<MessageItem[]>([]);
@@ -86,6 +89,7 @@ export default function Page() {
     <form ref={form}>
       <div className={styles.chatContainer}>
         <h1 className={styles.title}>ツンデレAIチャット</h1>
+        <GreetingMessage />
         <MessageList messages={messages} isOtherTyping={isPending} />
         <div className={styles.inputContainer}>
           <ResizableTextarea
