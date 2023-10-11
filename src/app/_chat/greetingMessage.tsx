@@ -11,6 +11,7 @@ export const GreetingMessage = () => (
       height={512}
       alt="アイコン"
       className={styles.icon}
+      loading="lazy"
     />
     <div className={`${styles.text} ${styles.aiText}`}>{GREETING_MESSAGE}</div>
   </div>
