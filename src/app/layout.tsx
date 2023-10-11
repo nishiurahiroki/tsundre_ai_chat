@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { Analytics } from '@vercel/analytics/react';
 
 import Favicon from '/public/images/metadata/favicon.ico';
+import Footer from './_footer';
 
 export const metadata: Metadata = {
   title: 'ツンデレAIチャット',
@@ -33,7 +34,10 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <Footer />
+      </body>
       <Analytics />
     </html>
   );
