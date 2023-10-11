@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "@vercel/analytics": "^1.1.0",
     "next": "^13.5.4",
     "openai": "^4.0.0",
     "react": "^18.2.0",

@@ -1,4 +1,6 @@
 import { Metadata } from 'next';
+import { Analytics } from '@vercel/analytics/react';
+
 import Favicon from '/public/images/metadata/favicon.ico';
 
 export const metadata: Metadata = {
@@ -26,6 +28,7 @@ export default function RootLayout({
         ></script>
       </head>
       <body>{children}</body>
+      <Analytics />
     </html>
   );
 }
