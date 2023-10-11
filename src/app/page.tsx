@@ -17,6 +17,7 @@ import ResizableTextarea from '../component/ResizableTextarea';
 
 export default function Page() {
   const [messages, setMessages] = useState<MessageItem[]>([]);
+  const [isTyping, setIsTyping] = useState<boolean>(false);
   const [isPending, startTransition] = useTransition();
   const form = useRef<HTMLFormElement>(null);
 
@@ -67,6 +68,8 @@ export default function Page() {
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && e.shiftKey) return;
+    if (isTyping) return;
+
     if (e.key === 'Enter') {
       e.preventDefault();
 
@@ -90,6 +93,8 @@ export default function Page() {
             className={styles.textarea}
             placeholder="メッセージを入力..."
             onKeyDown={handleKeyDown}
+            onCompositionStart={() => setIsTyping(true)}
+            onCompositionEnd={() => setIsTyping(false)}
           />
           <button
             onClick={handleOnClickButton}
