@@ -1,5 +1,4 @@
 import { Metadata } from 'next';
-import styles from './styles.module.css';
 import Favicon from '/public/images/metadata/favicon.ico';
 
 export const metadata: Metadata = {
@@ -19,7 +18,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ja">
-      <body className={styles.body}>{children}</body>
+      <head>
+        <script
+          async
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.GOOGLE_ADSENSE_CLIENT_ID}`}
+          crossOrigin="anonymous"
+        ></script>
+      </head>
+      <body>{children}</body>
     </html>
   );
 }
