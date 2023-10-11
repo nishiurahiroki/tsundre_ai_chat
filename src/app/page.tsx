@@ -3,7 +3,7 @@
 import { useRef, useState, useTransition } from 'react';
 import { ChatCompletionMessageParam } from 'openai/resources/chat/completions';
 
-import styles from './styles.module.css';
+import styles from './page.module.css';
 import {
   MessageItem,
   MessageList,
