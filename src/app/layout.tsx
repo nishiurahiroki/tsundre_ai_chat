@@ -21,11 +21,13 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <head>
-        <script
-          async
-          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.GOOGLE_ADSENSE_CLIENT_ID}`}
-          crossOrigin="anonymous"
-        ></script>
+        {process.env.NODE_ENV === 'production' && (
+          <script
+            async
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.GOOGLE_ADSENSE_CLIENT_ID}`}
+            crossOrigin="anonymous"
+          ></script>
+        )}
       </head>
       <body>{children}</body>
       <Analytics />
