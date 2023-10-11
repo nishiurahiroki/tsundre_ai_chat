@@ -28,6 +28,10 @@ export default function RootLayout({
             crossOrigin="anonymous"
           ></script>
         )}
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+        />
       </head>
       <body>{children}</body>
       <Analytics />
