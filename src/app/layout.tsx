@@ -3,6 +3,7 @@ import { Analytics } from '@vercel/analytics/react';
 
 import Favicon from '/public/images/metadata/favicon.ico';
 import Footer from './_footer';
+import { AdScript } from '../component/AdScript';
 
 export const metadata: Metadata = {
   title: 'ツンデレAIチャット',
@@ -22,13 +23,7 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <head>
-        {process.env.NODE_ENV === 'production' && (
-          <script
-            async
-            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.GOOGLE_ADSENSE_CLIENT_ID}`}
-            crossOrigin="anonymous"
-          ></script>
-        )}
+        {process.env.NODE_ENV === 'production' && <AdScript />}
         <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
