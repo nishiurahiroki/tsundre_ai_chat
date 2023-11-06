@@ -1,11 +1,10 @@
 'use client';
 
-import Image from 'next/image';
 import { useRef, useState, useTransition } from 'react';
 import { ChatCompletionMessageParam } from 'openai/resources/chat/completions';
 
 import styles from './page.module.css';
-import messageListStyles from './_chat/messageList.module.css';
+
 import {
   MessageItem,
   MessageList,
